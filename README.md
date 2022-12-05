@@ -1,2 +1,2 @@
 # rd_test_repo
-Created during lesson #2
+Created during robot_dreams lesson #2
