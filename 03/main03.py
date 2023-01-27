@@ -46,6 +46,6 @@ print('ANSWER 05:', result05)
 a = 2
 b = 5
 c = 6
-d = int(str(a)+str(b)+str(c))
+d = str(a)+str(b)+str(c)
 result06 = d
 print('ANSWER 06:', result06)
