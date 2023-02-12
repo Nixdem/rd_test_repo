@@ -1,0 +1,1 @@
+There was no homework for lecture 06.
