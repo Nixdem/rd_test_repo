@@ -13,28 +13,18 @@
 # Записи не мають повторюватися, заборонено перезаписувати записи, тільки видаляти і додавати заново.
 #
 
-# importing some necessary libs here
 import os
 import time
-# lib import finished
 
 phone_dic = {
     'entry0': None,
-    'entry1': 10,
-    'entry2': 20,
-    'entry3': 30,
-    'entry4': 40,
-    'entry5': 50,
+    'entry1': '10',
+    'entry2': '20',
+    'entry3': '30',
+    'entry4': '40',
+    'entry5': '50',
 }
 
-def dic_count_items(c_var_i):
-    counter = 0
-    for key0,value0 in c_var_i.items():
-        counter += 1
-    return counter
-
-
-# decided to do it in cycle, omg here we go
 while True:
     os.system('cls')
     inp = input('\n'
@@ -53,11 +43,11 @@ while True:
     # list ---------------------------
     if inp_l == 'list':
         os.system('cls')
-        print('\n')
+        print('')
         for k, v in phone_dic.items():
-            print(k, v)
+            print(f'{k}: {v}')
         list_inp = input('\n'
-                        'Enter anything to start over: ')
+                         'Enter anything to start over: ')
         if list_inp is not '':
             continue
         else:
@@ -68,49 +58,51 @@ while True:
     elif inp_l == 'stats':
         print(f'\n'
               f'This phonebook has:\n'
-              f'{dic_count_items(phone_dic)} entries\n'
+              f'{len(phone_dic)} entries\n'
               f'')
+        time.sleep(2)
     # stats ---------------------------
 
     # show ---------------------------
     elif inp_l == 'show':
         os.system('cls')
-        show_entry = input('\n'
-                          'Type name of the entry to show: ')
-        if show_entry in phone_dic.keys():
+        show_name = input('\n'
+                          'Enter name to show: ')
+        if show_name in phone_dic.keys():
             print(f'\n'
-                  f'Entry "{show_entry} : {phone_dic.get(show_entry)}" is present...')
-            time.sleep(3)
+                  f'Item "{show_name}: {phone_dic.get(show_name)}" is present...')
+            time.sleep(2)
         else:
             print(f'\n'
-                  f'Entry "{show_entry}" was not found...')
+                  f'Name "{show_name}" was not found...')
             time.sleep(2)
     # show ---------------------------
 
     # delete ---------------------------
     elif inp_l == 'delete':
         os.system('cls')
-        show_entry = input('\n'
-                          'Type name of the entry to delete: ')
-        if show_entry in phone_dic.keys():
-            del phone_dic[show_entry]
+        del_entry = input('\n'
+                          'Enter name to delete: ')
+        if del_entry in phone_dic.keys():
+            del phone_dic[del_entry]
             print(f'\n'
-                  f'Entry "{show_entry}" with a value has been deleted...')
+                  f'Entry "{del_entry}" has been deleted...')
             time.sleep(2)
         else:
             print(f'\n'
-                  f'Entry {show_entry} was not found...')
+                  f'Entry "{del_entry}" was not found...')
             time.sleep(2)
     # delete ---------------------------
 
     # add ---------------------------
     elif inp_l == 'add':
         os.system('cls')
-        new_entry = input('\n'
-                          'Type name for the new entry: ')
-        if new_entry not in phone_dic:
-            new_value = input('\n'
-                              'Type name for the new value: ')
+
+        new_value = input('\n'
+                          'Enter the new value (phone number): ')
+        if new_value not in phone_dic.values():
+            new_entry = input('\n'
+                              'Type name for the new entry: ')
             phone_dic[new_entry] = new_value
             os.system('cls')
             print('\n'
@@ -119,48 +111,30 @@ while True:
         else:
             os.system('cls')
             print(f'\n'
-                  f'There is the "{new_entry}" already. '
-                  f'You cannot overwrite it but you can delete it '
-                  f'and then create it with a new value.')
+                  f'Value (phone number) "{new_value}" already exists. \n'
+                  '\n'
+                  f'You cannot overwrite it but you can delete it, \n'
+                  f'and then create it with a new entry name.')
             add_inp = input('\n'
                             'Enter anything to start over: ')
-            if add_inp is not '':
+
+            if add_inp == '':
                 continue
             else:
                 continue
     # add ---------------------------
 
-    # no comm ---------------------------
+    # no such command ---------------------------
     else:
         os.system('cls')
         print(f'\n'
               f'There is no such command as "{inp_l}"')
-        while True:
-            nocom_inp = input('\n'
-                              'Type "yes" to start over.\n'
-                              'Type "exit" to exit.\n'
-                              '\n'
-                              'Enter command: ')
-            nocom_inp_l = str(nocom_inp.lower())
-            if nocom_inp_l == 'yes':
-                break
-            elif nocom_inp_l == 'exit':
-                os.system('cls')
-                print('\n'
-                      'I don\'t know how to break out of inner loops yet '
-                      'so that I could exit this program at this point '
-                      'without starting it over.')
-                any_inp = input('\n'
-                                'Enter anything to start over: ')
-                if any_inp is not '':
-                    break
-                else:
-                    break
-            elif nocom_inp_l != 'yes' or 'exit':
-                os.system('cls')
-                print('\n'
-                      'You have to type "yes" or "exit".')
-                continue
-            else:
-                continue
-    # no comm ---------------------------
+        any_inp = input('\n'
+                        'Type "exit" to terminate program \n'
+                        'or enter anything to start over: ')
+        any_inp_l = str(any_inp.lower())
+        if any_inp_l == 'exit':
+            break
+        else:
+            continue
+    # no such command ---------------------------
