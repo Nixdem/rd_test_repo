@@ -14,15 +14,13 @@
 #
 
 import os
-import time
 
 phone_dic = {
-    'entry0': None,
-    'entry1': '10',
-    'entry2': '20',
-    'entry3': '30',
-    'entry4': '40',
-    'entry5': '50',
+    '111': 'name1',
+    '222': 'name2',
+    '333': 'name3',
+    '444': 'name4',
+    '555': 'name5',
 }
 
 while True:
@@ -42,99 +40,91 @@ while True:
 
     # list ---------------------------
     if inp_l == 'list':
-        os.system('cls')
         print('')
         for k, v in phone_dic.items():
             print(f'{k}: {v}')
-        list_inp = input('\n'
-                         'Enter anything to start over: ')
-        if list_inp is not '':
-            continue
-        else:
-            continue
+        input('\n'
+              'Press ENTER to continue... ')
+        continue
     # list ---------------------------
 
     # stats ---------------------------
     elif inp_l == 'stats':
         print(f'\n'
               f'This phonebook has:\n'
-              f'{len(phone_dic)} entries\n'
-              f'')
-        time.sleep(2)
+              f'{len(phone_dic)} entries')
+        input('\n'
+              'Press ENTER to continue... ')
+        continue
     # stats ---------------------------
 
     # show ---------------------------
     elif inp_l == 'show':
-        os.system('cls')
         show_name = input('\n'
                           'Enter name to show: ')
-        if show_name in phone_dic.keys():
+        found = False
+        for k, v in phone_dic.items():
+            if show_name == v:
+                print(f'\n'
+                      f'Item "{k}: {v}" is present.')
+                input('\n'
+                      'Press ENTER to continue... ')
+                found = True
+        if not found:
             print(f'\n'
-                  f'Item "{show_name}: {phone_dic.get(show_name)}" is present...')
-            time.sleep(2)
-        else:
-            print(f'\n'
-                  f'Name "{show_name}" was not found...')
-            time.sleep(2)
+                  f'Name "{show_name}" was not found.')
+            input('\n'
+                  'Press ENTER to continue... ')
+            continue
     # show ---------------------------
 
     # delete ---------------------------
     elif inp_l == 'delete':
-        os.system('cls')
         del_entry = input('\n'
-                          'Enter name to delete: ')
+                          'Enter phone number to delete: ')
         if del_entry in phone_dic.keys():
             del phone_dic[del_entry]
             print(f'\n'
-                  f'Entry "{del_entry}" has been deleted...')
-            time.sleep(2)
+                  f'Phone number "{del_entry}" deleted.')
+            input('\n'
+                  'Press ENTER to continue... ')
+            continue
         else:
             print(f'\n'
-                  f'Entry "{del_entry}" was not found...')
-            time.sleep(2)
+                  f'Phone number "{del_entry}" not found.')
+            input('\n'
+                  'Press ENTER to continue... ')
+            continue
     # delete ---------------------------
 
     # add ---------------------------
     elif inp_l == 'add':
-        os.system('cls')
-
-        new_value = input('\n'
-                          'Enter the new value (phone number): ')
-        if new_value not in phone_dic.values():
-            new_entry = input('\n'
-                              'Type name for the new entry: ')
-            phone_dic[new_entry] = new_value
-            os.system('cls')
+        new_key = input('\n'
+                        'Enter new phone number: ')
+        if new_key not in phone_dic.keys():
+            new_name = input('\n'
+                             'Enter new name: ')
+            phone_dic[new_key] = new_name
             print('\n'
-                  'New entry with a value has been added...')
-            time.sleep(2)
+                  'New item has been added.')
+            input('\n'
+                  'Press ENTER to continue... ')
+            continue
         else:
-            os.system('cls')
             print(f'\n'
-                  f'Value (phone number) "{new_value}" already exists. \n'
+                  f'Phone number "{new_key}" already exists. \n'
                   '\n'
-                  f'You cannot overwrite it but you can delete it, \n'
-                  f'and then create it with a new entry name.')
-            add_inp = input('\n'
-                            'Enter anything to start over: ')
-
-            if add_inp == '':
-                continue
-            else:
-                continue
+                  f'You cannot overwrite it but you can delete it.')
+            input('\n'
+                  'Press ENTER to continue... ')
+            continue
     # add ---------------------------
 
     # no such command ---------------------------
     else:
-        os.system('cls')
         print(f'\n'
               f'There is no such command as "{inp_l}"')
-        any_inp = input('\n'
-                        'Type "exit" to terminate program \n'
-                        'or enter anything to start over: ')
-        any_inp_l = str(any_inp.lower())
-        if any_inp_l == 'exit':
-            break
-        else:
-            continue
+        input('\n'
+              'Press ENTER to continue... ')
+        continue
     # no such command ---------------------------
